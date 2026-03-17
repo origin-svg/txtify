@@ -1,541 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Txtify</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f1117;
-      color: #e2e8f0;
-      min-height: 100vh;
-      padding: 2rem;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white;
+      color: black;
+      margin: 30px;
+      padding: 0;
+      line-height: 1.5;
     }
-
-    header {
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
       text-align: center;
-      margin-bottom: 2rem;
     }
-
-    header h1 {
-      font-size: 2.2rem;
-      color: #7dd3fc;
-      letter-spacing: 0.05em;
-    }
-
-    header p {
-      color: #94a3b8;
-      font-size: 0.9rem;
-      margin-top: 0.3rem;
-    }
-
-    .container {
-      max-width: 860px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: #1e2130;
-      border: 1px solid #2d3348;
-      border-radius: 14px;
-      padding: 1.5rem;
-    }
-
-    .card h2 {
-      font-size: 0.85rem;
-      color: #7dd3fc;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 1.1rem;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
-
     label {
-      font-size: 0.78rem;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 16px;
+      display: block;
+      margin-bottom: 8px;
     }
-
-    input, select, textarea {
-      background: #0f1117;
-      border: 1px solid #2d3348;
-      border-radius: 8px;
-      color: #e2e8f0;
-      padding: 0.6rem 0.85rem;
-      font-size: 0.9rem;
-      font-family: inherit;
-      transition: border-color 0.2s;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: #7dd3fc;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tab {
-      background: #0f1117;
-      border: 1px solid #2d3348;
-      border-radius: 8px;
-      color: #94a3b8;
-      padding: 0.45rem 1rem;
-      cursor: pointer;
-      font-size: 0.83rem;
-      transition: all 0.2s;
-    }
-
-    .tab:hover {
-      border-color: #7dd3fc;
-      color: #7dd3fc;
-    }
-
-    .tab.active {
-      background: #172a3a;
-      border-color: #7dd3fc;
-      color: #7dd3fc;
-      font-weight: 700;
-    }
-
-    .preview-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #161825;
-      border-bottom: 1px solid #2d3348;
-      padding: 0.7rem 1rem;
-      border-radius: 10px 10px 0 0;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .file-label {
-      font-family: monospace;
-      font-size: 0.85rem;
-      color: #f8c555;
-    }
-
-    .actions {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.42rem 0.9rem;
-      transition: opacity 0.2s;
-    }
-
-    .btn:hover { opacity: 0.8; }
-    .btn-copy { background: #334155; color: #cbd5e1; }
-    .btn-dl { background: #0891b2; color: #fff; }
-
-    .preview-box {
-      background: #0f1117;
-      border: 1px solid #2d3348;
-      border-top: none;
-      border-radius: 0 0 10px 10px;
-      padding: 1.2rem;
-      font-family: 'Courier New', monospace;
-      font-size: 0.83rem;
-      line-height: 1.7;
-      color: #cbd5e1;
-      white-space: pre-wrap;
-      min-height: 200px;
-      max-height: 420px;
-      overflow-y: auto;
-    }
-
-    .btn-generate {
+    input[type="text"] {
       width: 100%;
-      background: linear-gradient(135deg, #0891b2, #1d4ed8);
-      color: #fff;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #555;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 450px;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #555;
+      font-family: Arial, Helvetica, sans-serif;
+      resize: vertical;
+    }
+    button {
+      background-color: black;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
       border: none;
-      border-radius: 10px;
-      padding: 0.85rem;
-      font-size: 1rem;
-      font-weight: 700;
       cursor: pointer;
-      transition: opacity 0.2s;
-      letter-spacing: 0.03em;
+      margin-top: 15px;
     }
-
-    .btn-generate:hover { opacity: 0.88; }
-
-    .toast {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      background: #0891b2;
-      color: #fff;
-      padding: 0.7rem 1.3rem;
-      border-radius: 9px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.3s;
-      pointer-events: none;
+    button:hover {
+      background-color: #333;
     }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 600px) {
-      .form-grid { grid-template-columns: 1fr; }
-      .form-group.full { grid-column: 1; }
-      body { padding: 1rem; }
+    .info {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 14px;
+      color: #555;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Txtify</h1>
-    <p>Genera y descarga archivos de proyecto como <strong>.txt</strong></p>
-  </header>
+  <h1>Txtify</h1>
 
-  <div class="container">
+  <label>Nombre del archivo:</label>
+  <input type="text" id="filename" value="documento.txt">
 
-    <div class="card">
-      <h2>Datos del proyecto</h2>
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Nombre del proyecto</label>
-          <input type="text" id="projName" placeholder="Mi Proyecto" />
-        </div>
-        <div class="form-group">
-          <label>Autor</label>
-          <input type="text" id="projAuthor" placeholder="Tu nombre" />
-        </div>
-        <div class="form-group">
-          <label>Año</label>
-          <input type="text" id="projYear" placeholder="2026" />
-        </div>
-        <div class="form-group">
-          <label>Versión</label>
-          <input type="text" id="projVersion" placeholder="1.0.0" />
-        </div>
-        <div class="form-group full">
-          <label>Descripción</label>
-          <textarea id="projDesc" placeholder="Describe tu proyecto brevemente..."></textarea>
-        </div>
-      </div>
-    </div>
+  <label>Texto a guardar:</label>
+  <textarea id="content" placeholder="Escribe aquí el texto que quieres guardar..."></textarea>
 
-    <div class="card">
-      <h2>Tipo de archivo</h2>
-      <div class="tabs" id="tabs">
-        <button class="tab active" data-type="changelog">CHANGELOG</button>
-        <button class="tab" data-type="contributing">CONTRIBUTING</button>
-        <button class="tab" data-type="gitignore">.gitignore</button>
-        <button class="tab" data-type="todo">TODO</button>
-        <button class="tab" data-type="env">.env.example</button>
-      </div>
-    </div>
+  <button onclick="descargarTXT()">Descargar como .txt</button>
 
-    <button class="btn-generate" onclick="generate()">⚡ Generar archivo</button>
-
-    <div class="card" style="padding:0; overflow:hidden;">
-      <div class="preview-bar">
-        <span class="file-label" id="fileLabel">CHANGELOG.txt</span>
-        <div class="actions">
-          <button class="btn btn-copy" onclick="copyText()">Copiar</button>
-          <button class="btn btn-dl" onclick="downloadFile()">Descargar .txt</button>
-        </div>
-      </div>
-      <div class="preview-box" id="preview">El contenido generado aparecerá aquí...</div>
-    </div>
-
+  <div class="info">
+    Escribe el texto y presiona el botón para descargar el archivo .txt
   </div>
 
-  <div class="toast" id="toast"></div>
-
   <script>
-    let currentType = 'changelog';
+    function descargarTXT() {
+      const filename = document.getElementById("filename").value.trim();
+      const content = document.getElementById("content").value;
 
-    document.querySelectorAll('.tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        btn.classList.add('active');
-        currentType = btn.dataset.type;
-      });
-    });
-
-    function getData() {
-      return {
-        name: document.getElementById('projName').value.trim() || 'Mi Proyecto',
-        author: document.getElementById('projAuthor').value.trim() || 'Autor',
-        year: document.getElementById('projYear').value.trim() || '2026',
-        version: document.getElementById('projVersion').value.trim() || '1.0.0',
-        desc: document.getElementById('projDesc').value.trim() || 'Sin descripción.',
-      };
-    }
-
-    function generate() {
-      const d = getData();
-
-      const generators = {
-        changelog: generateChangelog,
-        contributing: generateContributing,
-        gitignore: generateGitignore,
-        todo: generateTodo,
-        env: generateEnv,
-      };
-
-      const fileNames = {
-        changelog: 'CHANGELOG.txt',
-        contributing: 'CONTRIBUTING.txt',
-        gitignore: 'gitignore.txt',
-        todo: 'TODO.txt',
-        env: 'env.example.txt',
-      };
-
-      document.getElementById('preview').textContent = generators[currentType](d);
-      document.getElementById('fileLabel').textContent = fileNames[currentType];
-      showToast('Archivo generado');
-    }
-
-    function generateChangelog(d) {
-      return `CHANGELOG - ${d.name}
-${'='.repeat(12 + d.name.length)}
-
-Todos los cambios notables de este proyecto se documentan en este archivo.
-
-[${d.version}] - ${d.year}
----------------------------
-AGREGADO
-  - Version inicial del proyecto
-  - Funcionalidades principales implementadas
-  - Documentacion base
-
-CAMBIADO
-  - (nada aun)
-
-CORREGIDO
-  - (nada aun)
-
-ELIMINADO
-  - (nada aun)
-
----
-Copyright (c) ${d.year} ${d.author}`;
-    }
-
-    function generateContributing(d) {
-      return `GUIA DE CONTRIBUCION - ${d.name}
-${'='.repeat(23 + d.name.length)}
-
-Gracias por tu interes en contribuir a ${d.name}.
-
-COMO CONTRIBUIR
----------------
-1. Haz un fork del repositorio
-2. Crea una rama nueva: git checkout -b feature/mi-mejora
-3. Realiza tus cambios y haz commit: git commit -m "Agrega mi mejora"
-4. Sube los cambios: git push origin feature/mi-mejora
-5. Abre un Pull Request
-
-ESTANDARES DE CODIGO
---------------------
-- Usa nombres descriptivos para variables y funciones
-- Comenta el codigo cuando sea necesario
-- Mantén consistencia con el estilo existente
-- Asegurate de que el codigo funcione antes de enviarlo
-
-REPORTAR ERRORES
-----------------
-- Describe el error con claridad
-- Incluye pasos para reproducirlo
-- Indica tu sistema operativo y version utilizada
-
-CODIGO DE CONDUCTA
-------------------
-- Se respetuoso con otros colaboradores
-- Las criticas deben ser constructivas
-- Cualquier contribucion es bienvenida
-
-Copyright (c) ${d.year} ${d.author}`;
-    }
-
-    function generateGitignore(d) {
-      return `# Archivo gitignore para ${d.name}
-# Generado con Txtify
-
-DEPENDENCIAS Y MODULOS
-node_modules/
-vendor/
-.venv/
-__pycache__/
-*.pyc
-
-VARIABLES DE ENTORNO Y SECRETOS
-.env
-.env.local
-.env.production
-*.key
-*.pem
-
-ARCHIVOS DE BUILD
-dist/
-build/
-out/
-.next/
-.nuxt/
-
-EDITORES E IDEs
-.vscode/
-.idea/
-*.suo
-*.user
-.DS_Store
-Thumbs.db
-
-LOGS Y TEMPORALES
-*.log
-logs/
-tmp/
-temp/
-*.tmp
-*.cache
-
-COBERTURA Y TESTS
-coverage/
-.nyc_output/
-*.lcov`;
-    }
-
-    function generateTodo(d) {
-      return `LISTA DE TAREAS - ${d.name}
-${'='.repeat(17 + d.name.length)}
-Version: ${d.version}
-Autor  : ${d.author}
-Fecha  : ${d.year}
-
-PENDIENTE
----------
-[ ] Definir estructura principal del proyecto
-[ ] Implementar funcionalidades core
-[ ] Escribir pruebas unitarias
-[ ] Configurar entorno de produccion
-[ ] Revisar documentacion
-
-EN PROGRESO
------------
-[~] Configuracion inicial del proyecto
-
-COMPLETADO
-----------
-[x] Creacion del repositorio
-[x] Definicion del alcance del proyecto
-
-NOTAS
------
-- Priorizar tareas marcadas con (!)
-- Revisar esta lista semanalmente`;
-    }
-
-    function generateEnv(d) {
-      return `# Variables de entorno - ${d.name}
-# Copia este archivo como .env y completa los valores reales
-# NO subas el archivo .env al repositorio
-
-APP_NAME=${d.name}
-APP_VERSION=${d.version}
-APP_ENV=development
-APP_PORT=3000
-APP_DEBUG=true
-
-BASE_URL=http://localhost:3000
-
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=nombre_base_de_datos
-DB_USER=usuario
-DB_PASSWORD=contrasena_segura
-
-API_KEY=tu_api_key_aqui
-API_SECRET=tu_api_secret_aqui
-
-JWT_SECRET=tu_jwt_secret_aqui
-JWT_EXPIRES_IN=7d
-
-MAIL_HOST=smtp.ejemplo.com
-MAIL_PORT=587
-MAIL_USER=correo@ejemplo.com
-MAIL_PASS=contrasena_correo
-
-# Generado con Txtify - ${d.author} ${d.year}`;
-    }
-
-    function copyText() {
-      const text = document.getElementById('preview').textContent;
-      if (text === 'El contenido generado aparecerá aquí...') {
-        showToast('Genera un archivo primero');
+      if (!filename) {
+        alert("Por favor escribe un nombre para el archivo");
         return;
       }
-      navigator.clipboard.writeText(text).then(() => showToast('Copiado al portapapeles'));
-    }
 
-    function downloadFile() {
-      const text = document.getElementById('preview').textContent;
-      if (text === 'El contenido generado aparecerá aquí...') {
-        showToast('Genera un archivo primero');
-        return;
-      }
-      const fileName = document.getElementById('fileLabel').textContent;
-      const blob = new Blob([text], { type: 'text/plain' });
+      const blob = new Blob([content], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = fileName;
+      a.download = filename.endsWith(".txt") ? filename : filename + ".txt";
       a.click();
       URL.revokeObjectURL(url);
-      showToast('Descargando ' + fileName);
-    }
-
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2200);
     }
   </script>
 
