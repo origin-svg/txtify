@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Txtify</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: white;
+      color: black;
+      margin: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Txtify</h2>
+
+<p>
+  <label>Nombre del archivo:</label><br>
+  <input type="text" id="nombre" value="archivo.txt" style="width: 300px; padding: 8px;">
+</p>
+
+<p>
+  <label>Texto:</label><br>
+  <textarea id="texto" style="width: 100%; height: 400px; padding: 8px;"></textarea>
+</p>
+
+<p>
+  <button onclick="descargar()" style="padding: 10px 20px; font-size: 16px;">Descargar TXT</button>
+</p>
+
+<script>
+function descargar() {
+  var nombre = document.getElementById("nombre").value;
+  var texto = document.getElementById("texto").value;
+  
+  var archivo = new Blob([texto], {type: "text/plain"});
+  var link = document.createElement("a");
+  link.href = URL.createObjectURL(archivo);
+  link.download = nombre;
+  link.click();
+}
+</script>
+
+</body>
+</html>
